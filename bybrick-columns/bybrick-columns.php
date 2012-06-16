@@ -14,7 +14,7 @@ byBrick Accordion Plugin
 Written by David Pausson (@davidpaulsson) & Emil Tullstedt (@sakjur)
 */
 
-$bbcodes = array('one_third', 'one_third_last', 'two_third', 'two_third_last', 'one_half', 'one_half_last', 'one_fourth', 'one_fourth_last', 'three_fourth', 'three_fourth_last', 'one_fifth', 'one_fifth_last', 'two_fifth', 'two_fifth_last', 'three_fifth', 'three_fifth_last', 'four_fifth', 'four_fifth_last', 'one_sixth', 'one_sixth_last', 'five_sixth', 'five_sixth_last');
+$bbcodes = array('col_start', 'one_third', 'one_third_last', 'two_third', 'two_third_last', 'one_half', 'one_half_last', 'one_fourth', 'one_fourth_last', 'three_fourth', 'three_fourth_last', 'one_fifth', 'one_fifth_last', 'two_fifth', 'two_fifth_last', 'three_fifth', 'three_fifth_last', 'four_fifth', 'four_fifth_last', 'one_sixth', 'one_sixth_last', 'five_sixth', 'five_sixth_last');
 
 add_filter('the_posts', 'bb_include_style_if_needed');
 
@@ -33,12 +33,16 @@ function bb_include_style_if_needed($posts) {
 	}
 
 	if ($bb_style_required) {
-		$style = plugins_url('/bb-columns-style.min.css', __FILE__);
+		$style = plugins_url('/bb-columns-style.css', __FILE__);
 	    wp_enqueue_style("bb-column-style", $style);
 	} 
 
 	return $posts;
 	
+}
+
+function nsonic_col_start( $atts, $content = null ) {
+   return '<div class="col_start">' . do_shortcode($content) . '</div>';
 }
 
 function bb_one_third( $atts, $content = null ) {
